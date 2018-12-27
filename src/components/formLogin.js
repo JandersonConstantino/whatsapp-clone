@@ -8,12 +8,8 @@ import {
   Platform,
   TouchableHighlight,
 } from 'react-native'
-
-import {
-  Actions,
-} from 'react-native-router-flux'
-
-
+import { Actions, } from 'react-native-router-flux'
+import { connect, } from 'react-redux'
 
 const styles = StyleSheet.create({
   container: {
@@ -46,16 +42,17 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class Formlogin extends React.Component {
+class Formlogin extends React.Component {
   render() {
+    let { email, password, } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.containerTitle}>
           <Text style={styles.styleTitle}>WhatsApp Clone</Text>
         </View>
         <View style={styles.containerContent}>
-          <TextInput style={styles.textInput} placeholder='E-mail' />
-          <TextInput style={styles.textInput} placeholder='Senha' />
+          <TextInput style={styles.textInput} placeholder='E-mail' value={email} />
+          <TextInput style={styles.textInput} placeholder='Senha' value={password}/>
           <TouchableHighlight onPress={() => Actions.cadastro()}>
             <Text style={styles.textCadastre}>Ainda não tem cadastro? Cadastre-se</Text>
           </TouchableHighlight>
@@ -67,3 +64,11 @@ export default class Formlogin extends React.Component {
     )
   }
 } 
+
+const mapStateToProps = state => (
+  {
+    email: state.Auth.email,
+    password: state.Auth.password
+  }
+)
+export default connect(mapStateToProps, null)(Formlogin)
