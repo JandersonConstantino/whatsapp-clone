@@ -5,8 +5,13 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  Platform
+  Platform,
+  TouchableHighlight,
 } from 'react-native'
+
+import {
+  Actions,
+} from 'react-native-router-flux'
 
 
 
@@ -51,7 +56,9 @@ export default class Formlogin extends React.Component {
         <View style={styles.containerContent}>
           <TextInput style={styles.textInput} placeholder='E-mail' />
           <TextInput style={styles.textInput} placeholder='Senha' />
-          <Text style={styles.textCadastre}>Ainda não tem cadastro? Cadastre-se</Text>
+          <TouchableHighlight onPress={() => Actions.cadastro()}>
+            <Text style={styles.textCadastre}>Ainda não tem cadastro? Cadastre-se</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.containerBottom}>
           <Button style={styles.styleButton} title="Acessar" onPress={() => false} />
