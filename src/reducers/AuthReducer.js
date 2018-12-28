@@ -8,7 +8,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ON_CHANGE':
     console.log(state)
-      let obj = state
+      let obj = Object.assign({}, state)
       obj[action.payload.field] = action.payload.value
       return obj
 
