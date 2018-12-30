@@ -2,7 +2,7 @@ import React from 'react'
 import {
   View,
   Text,
-  TextInput,
+  ImageBackground,
   Button,
   StyleSheet,
   Platform,
@@ -35,9 +35,12 @@ const styles = StyleSheet.create({
   },
   styleTitle: {
     fontSize: 25,
+    backgroundColor: 'transparent',
+    color: '#fff',
   },
   textCadastre: {
     fontSize: 20,
+    color: '#fff',
   },
   styleButton: {
     color: '#115E54',
@@ -53,24 +56,26 @@ class Formlogin extends React.Component {
   render() {
     let { email, password, } = this.props
     return (
-      <View style={styles.container}>
-        <View style={styles.containerTitle}>
-          <Text style={styles.styleTitle}>WhatsApp Clone</Text>
+      <ImageBackground source={require('../../assets/bg.png')} style={{flex: 1}}>
+        <View style={styles.container}>
+          <View style={styles.containerTitle}>
+            <Text style={styles.styleTitle}>WhatsApp Clone</Text>
+          </View>
+          <View style={styles.containerContent}>
+            <Input placeholder='E-mail' value={email} onChangeText={value => this._handleChange(value, 'email')} />
+            <Input secureTextEntry placeholder='Senha' value={password} onChangeText={value => this._handleChange(value, 'password')} />
+            <TouchableHighlight onPress={() => Actions.cadastro()}>
+              <Text style={styles.textCadastre}>Ainda não tem cadastro? Cadastre-se</Text>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.containerBottom}>
+            <Button style={styles.styleButton} title="Acessar" onPress={() => false} />
+          </View>
         </View>
-        <View style={styles.containerContent}>
-          <Input placeholder='E-mail' value={email} onChangeText={value => this._handleChange(value, 'email')} />
-          <Input placeholder='Senha' value={password} onChangeText={value => this._handleChange(value, 'password')} />
-          <TouchableHighlight onPress={() => Actions.cadastro()}>
-            <Text style={styles.textCadastre}>Ainda não tem cadastro? Cadastre-se</Text>
-          </TouchableHighlight>
-        </View>
-        <View style={styles.containerBottom}>
-          <Button style={styles.styleButton} title="Acessar" onPress={() => false} />
-        </View>
-      </View>
+      </ImageBackground>
     )
   }
-} 
+}
 
 const mapStateToProps = state => (
   {

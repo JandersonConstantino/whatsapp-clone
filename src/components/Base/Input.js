@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 20,
     height: 45,
+    color: '#ffffff',
   },
 })
 
@@ -28,6 +29,8 @@ export default class Input extends Component {
         value={value}
         onChangeText={e => this._handleOnChangeText(e)}
         style={styles.textInput}
+        secureTextEntry={this.props.secureTextEntry || false}
+        placeholderTextColor='#ffffff'
       />
     )
   }
