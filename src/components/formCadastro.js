@@ -4,13 +4,14 @@ import {
   Button,
   ImageBackground,
   Text,
+  ActivityIndicator,
 } from 'react-native'
 import { connect } from 'react-redux'
 
 import Input from './Base/Input'
 import {
   onChange,
-  registerUser,
+  signUpUser,
 } from '../actions/AuthAction'
 
 class FormCadastro extends React.Component {
@@ -19,13 +20,22 @@ class FormCadastro extends React.Component {
   }
 
   _handleRegisterButton() {
-    let { registerUser, name, email, password } = this.props
+    let { signUpUser, name, email, password } = this.props
 
-    registerUser({
+    signUpUser({
       name,
       email,
       password
     })
+  }
+
+  _renderButtonSignUp() {
+    let { loadingSignUp, } = this.props
+
+    return (
+      loadingSignUp ? <ActivityIndicator size='large' />
+      : <Button title="Cadastrar" onPress={() => this._handleRegisterButton()} />
+    )
   }
 
   render() {
@@ -42,7 +52,7 @@ class FormCadastro extends React.Component {
             </Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Button title="Cadastrar" onPress={() => this._handleRegisterButton()} />
+            { this._renderButtonSignUp() }
           </View>
         </View>
       </ImageBackground>
@@ -55,9 +65,10 @@ const mapStateToProps = state => ({
   email: state.Auth.email,
   password: state.Auth.password,
   errorMessage: state.Auth.errorMessage,
+  loadingSignUp: state.Auth.loadingSignUp
 })
 
 export default connect(mapStateToProps, {
   onChange,
-  registerUser,
+  signUpUser,
 })(FormCadastro)

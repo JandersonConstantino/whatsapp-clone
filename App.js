@@ -13,12 +13,12 @@ export default class App extends React.Component {
 
   componentWillMount() {
     let config = {
-      apiKey: "AIzaSyDYh6nJAloKq-fZ9_16urv-WkgMIc90A2o",
-      authDomain: "curso-react-native-c850b.firebaseapp.com",
-      databaseURL: "https://curso-react-native-c850b.firebaseio.com",
-      projectId: "curso-react-native-c850b",
-      storageBucket: "curso-react-native-c850b.appspot.com",
-      messagingSenderId: "111802462574"
+      apiKey: "AIzaSyA0VwfXr6xa8Gw1pXKIvxzhNOLxx3FfU90",
+      authDomain: "whatsapp-clone-4e88d.firebaseapp.com",
+      databaseURL: "https://whatsapp-clone-4e88d.firebaseio.com",
+      projectId: "whatsapp-clone-4e88d",
+      storageBucket: "whatsapp-clone-4e88d.appspot.com",
+      messagingSenderId: "414832193296"
     }
     firebase.initializeApp(config)
   }

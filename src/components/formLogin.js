@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Platform,
   TouchableHighlight,
+  ActivityIndicator,
 } from 'react-native'
 import { Actions, } from 'react-native-router-flux'
 import { connect, } from 'react-redux'
@@ -14,7 +15,8 @@ import { connect, } from 'react-redux'
 import Input from './Base/Input'
 
 import {
-  onChange
+  onChange,
+  signInUser,
 } from '../actions/AuthAction'
 
 const styles = StyleSheet.create({
@@ -53,8 +55,17 @@ class Formlogin extends React.Component {
     this.props.onChange(value, field)
   }
 
+  _renderBtnAccess() {
+    let { email, password, signInUser, loadingSignIn } = this.props
+
+    return (
+      loadingSignIn ? <ActivityIndicator size='large' />
+        : <Button style={styles.styleButton} title="Acessar" onPress={() => signInUser({email, password})} />
+    )
+  }
+
   render() {
-    let { email, password, } = this.props
+    let { email, password, errorMessageSignIn, } = this.props
     return (
       <ImageBackground source={require('../../assets/bg.png')} style={{flex: 1}}>
         <View style={styles.container}>
@@ -69,7 +80,10 @@ class Formlogin extends React.Component {
             </TouchableHighlight>
           </View>
           <View style={styles.containerBottom}>
-            <Button style={styles.styleButton} title="Acessar" onPress={() => false} />
+            { this._renderBtnAccess() }
+            <Text style={{color: 'red', fontWeight: 'bold', backgroundColor: errorMessageSignIn ? 'white' : 'transparent'}}>
+              {errorMessageSignIn}
+            </Text>
           </View>
         </View>
       </ImageBackground>
@@ -80,9 +94,12 @@ class Formlogin extends React.Component {
 const mapStateToProps = state => (
   {
     email: state.Auth.email,
-    password: state.Auth.password
+    password: state.Auth.password,
+    errorMessageSignIn: state.Auth.errorMessageSignIn,
+    loadingSignIn: state.Auth.loadingSignIn,
   }
 )
 export default connect(mapStateToProps, {
   onChange,
+  signInUser,
 })(Formlogin)
