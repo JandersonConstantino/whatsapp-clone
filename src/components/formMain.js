@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import { Constants } from 'expo'
+import firebase from 'firebase'
 
 import FormMeetList from './formMeetList'
 import FormContact from './formContact'
@@ -49,7 +50,12 @@ export default class TabViewExample extends React.Component {
               <Image source={require('../../assets/add-contact.png')} />
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={() => false}>
+            <TouchableHighlight onPress={() => {
+              firebase.auth().signOut()
+                .then(() => {
+                  Actions.login()
+                })
+            }}>
               <Text style={{fontSize: 20, color: '#fff', marginLeft: 20}}>Sair</Text>
             </TouchableHighlight>
           </View>

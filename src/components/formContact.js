@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   nameContactListView: {
     fontSize: 25,
-    
   },
   emailContactListView: {
     fontSize: 18
@@ -42,14 +41,22 @@ class FormContato extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     this._makeDataSource(nextProps.listContacts)
   }
 
   _makeDataSource(contacts) {
-    console.log('contacts', contacts)
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.dataSource = ds.cloneWithRows(contacts)
+  }
+
+  _onPressContact(rowData) {
+    Actions.meet({
+      title: rowData.name,
+      currentContact: {
+        name: rowData.name,
+        email: rowData.email
+      }
+    })
   }
 
   render() {
@@ -58,9 +65,11 @@ class FormContato extends Component {
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={rowData => {
-          console.log(rowData)
           return (
-            <TouchableHighlight onPress={() => Actions.meet()} underlayColor='#E6E6E6'>
+            <TouchableHighlight
+              onPress={() => this._onPressContact(rowData)}
+              underlayColor='#E6E6E6'
+            >
               <View style={styles.containerRowListView}>
                 <Text style={styles.nameContactListView}>{rowData.name}</Text>
                 <Text style={styles.emailContactListView}>{rowData.email}</Text>

@@ -54,6 +54,22 @@ export const signInUser = ({ email, password }) => {
           type: types.AUTH_USER_SUCCESS
         })
 
+        dispath({
+          type: types.ON_CHANGE,
+          payload: {
+            field: 'email',
+            value: ''
+          }
+        })
+
+        dispath({
+          type: types.ON_CHANGE,
+          payload: {
+            field: 'password',
+            value: ''
+          }
+        })
+
         Actions.main()
       })
       .catch(error => {
