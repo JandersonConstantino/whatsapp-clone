@@ -5,17 +5,23 @@ import {
   TouchableOpacity,
   StyleSheet,
   Text,
-  Platform
+  Platform,
+  TouchableHighlight,
+  Image,
 } from 'react-native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import { Constants } from 'expo'
 
+import FormMeet from './formMeet'
+import FormContact from './formContact'
+import { Actions } from 'react-native-router-flux';
+
 const MeetRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#ff4081' }]} />
+  <FormMeet />
 );
 
 const ContactRoute = () => (
-  <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
+  <FormContact />
 );
 
 export default class TabViewExample extends React.Component {
@@ -33,22 +39,35 @@ export default class TabViewExample extends React.Component {
     const inputRange = props.navigationState.routes.map((x, i) => i);
 
     return (
-      <View style={{marginTop: Platform.OS === 'ios' ? 30 : 0, }}>
-        <Text style={{ alignItems: 'center', justifyContent: 'center', fontSize: 20, marginLeft: 20}}>
-          WhatsApp Clone
-        </Text>
+      <View style={{ paddingTop: Platform.OS === 'ios' ? 30 : 0, backgroundColor: '#115E54', elevation: 4, marginBottom: 6 }}>
+        <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <Text style={{ fontSize: 16, color: '#fff', marginLeft: 10 }}>
+            WhatsApp Clone
+          </Text>
+          <View style={{flexDirection: 'row', marginRight: 10}}>
+            <TouchableHighlight onPress={() => Actions.addContact()} underlayColor='transparent'>
+              <Image source={require('../../assets/add-contact.png')} />
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={() => false}>
+              <Text style={{fontSize: 20, color: '#fff', marginLeft: 20}}>Sair</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+
         <View style={styles.tabBar}>
-          
+
           {props.navigationState.routes.map((route, i) => {
             const color = props.position.interpolate({
               inputRange,
               outputRange: inputRange.map(
-                inputIndex => (inputIndex === i ? '#D6356C' : '#222')
+                inputIndex => (inputIndex === i ? '#FFF' : '#b3afaf')
               ),
             })
 
             return (
               <TouchableOpacity
+                key={i}
                 style={styles.tabItem}
                 onPress={() => this.setState({ index: i })}>
                 <Animated.Text style={{ color }}>{route.title}</Animated.Text>
@@ -89,5 +108,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
+    paddingBottom: 10,
   },
 })
