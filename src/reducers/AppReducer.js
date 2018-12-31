@@ -16,7 +16,6 @@ export default (state = INITIAL_STATE, action) => {
 
     case types.ADD_CONTACT_IS_SUCCESS:
       return { ...state, createNewContactIsSuccess: action.payload }
-
     default:
       return state
   }

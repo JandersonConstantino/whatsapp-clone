@@ -10,6 +10,7 @@ import FormCadastro from './components/formCadastro'
 import BoasVindas from './components/BoasVindas'
 import FormMain from './components/formMain'
 import AddContact from './components/formNewContact'
+import FormMeet from './components/formMeet'
 
 const styles = {
   navigationBarStyle: {
@@ -24,7 +25,8 @@ export default routes = () => (
       <Scene key='cadastro' component={FormCadastro} title='Cadastro' />
       <Scene key='boasVindas' component={BoasVindas}  title='Boas Vindas' hideNavBar />
       <Scene key='main' component={FormMain} hideNavBar />
-      <Scene key='addContact' component={AddContact} title='Novo contato' />     
+      <Scene key='addContact' component={AddContact} title='Novo contato' />
+      <Scene key='meet' component={FormMeet} title='Meet' />
     </Stack>
   </Router>
 )

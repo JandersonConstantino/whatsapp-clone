@@ -50,3 +50,23 @@ export const AddContactIsSucces = value => {
     payload: value
   }
 }
+
+export const listContactsFetch = () => {
+
+  return dispatch => {
+    let { currentUser } = firebase.auth()
+
+    firebase.database().ref(`/userContacts/${b64.encode(currentUser.email)}`)
+      .on('value', snapshot => {
+
+        let value = _.map(snapshot.val(), (val, uid) => {
+          return { ...val, uid }
+        })
+
+        dispatch({
+          type: 'LIST_CONTACTS_FETCH',
+          payload: value
+        })
+      })
+  }
+}

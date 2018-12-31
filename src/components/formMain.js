@@ -12,12 +12,12 @@ import {
 import { TabView, SceneMap } from 'react-native-tab-view'
 import { Constants } from 'expo'
 
-import FormMeet from './formMeet'
+import FormMeetList from './formMeetList'
 import FormContact from './formContact'
 import { Actions } from 'react-native-router-flux';
 
 const MeetRoute = () => (
-  <FormMeet />
+  <FormMeetList />
 );
 
 const ContactRoute = () => (
